@@ -95,8 +95,8 @@ Eliot_sigfox wireless;
 #elif WIFI
 #include "Eliot_wifi.h"
 Eliot_wifi wireless;
-char ssid[32] = "eliot4plexus_zero";
-char pwd[32] = "0CAFFED00D0";
+char ssid[32] = "your_ssid";
+char pwd[32] = "your_password";
 #define PERIOD 60000
 #endif
 
