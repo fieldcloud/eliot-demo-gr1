@@ -23,7 +23,17 @@ short Eliot_wifi::init(void){
     }
     send_cmd("AT+CWMODE_CUR=1", "OK", "ERROR", 10000);
     init_id();
-    return send_cmd("AT", "OK", "ERROR", 5000);
+    short r = 0;
+    while (r == 0){
+        digitalWrite(BLUE, HIGH);
+        r = connect();
+        digitalWrite(BLUE, LOW);
+        if (r==0){
+            delay(1000);
+        }
+    }
+    r = send_cmd("AT", "OK", "ERROR", 5000);
+    return r;
 }
 
 short Eliot_wifi::init(char *ssid, char *pwd){
@@ -41,9 +51,9 @@ short Eliot_wifi::send(int experimentation, int device_code, int batt, int senso
   if (length > 10) {
     return 0;
   } else {
-      short r = connect();
-      char cmd[256];
-      memset(cmd, '\0', 100);
+      short r = 0;
+      char cmd[128];
+      memset(cmd, '\0', 128);
       sprintf(cmd, "AT+CIPSTART=\"TCP\",\"%s\",%i",_ip,_port);
       r = send_cmd(cmd, "OK", "ERROR", 10000);
       if (r==1){
@@ -64,7 +74,7 @@ short Eliot_wifi::send(int experimentation, int device_code, int batt, int senso
               }
       }
     }
-    disconnect();
+//    disconnect();
   return r;
  }
 }
@@ -96,7 +106,7 @@ int8_t Eliot_wifi::send_cmd(char *ATcommand, char *expected_answer1, char *expec
 
       x = 0;
 
-      delay(100);
+//      delay(100);
       do {
         // if there are data in the UART input buffer, reads it and checks for the asnwer
         if (Serial.available() != 0) {
