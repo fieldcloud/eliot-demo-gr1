@@ -69,6 +69,11 @@ int sensor_code = MOISTURE;
 Eliot_gas sensor;
 #define DATA_FREQ 1000
 int sensor_code = GAS;
+#elif MOTION
+#include <Eliot_motion.h>
+Eliot_motion sensor;
+#define DATA_FREQ 100
+int sensor_code = MOTION;
 #elif LIGHT
 #include <Eliot_light.h>
 Eliot_light sensor;
