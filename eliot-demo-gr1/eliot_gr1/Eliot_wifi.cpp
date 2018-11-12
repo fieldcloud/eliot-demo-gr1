@@ -201,7 +201,7 @@ uint8_t Eliot_wifi::connect(void){
     uint8_t answer = 0;
     char cmd[128] = "";
     sprintf(cmd, "AT+CWJAP_CUR=\"%s\",\"%s\"",_ssid,_pwd);
-    answer = send_cmd(cmd, "OK", "ERROR", 15000);
+    answer = send_cmd(cmd, "OK", "ERROR", 25000);
     delay(2000);
     return answer;
 }
