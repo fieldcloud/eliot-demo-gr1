@@ -55,7 +55,7 @@ short Eliot_wifi::send(int experimentation, int device_code, int batt, int senso
       char cmd[128];
       memset(cmd, '\0', 128);
       sprintf(cmd, "AT+CIPSTART=\"TCP\",\"%s\",%i",_ip,_port);
-      r = send_cmd(cmd, "OK", "ERROR", 10000);
+      r = send_cmd(cmd, "OK", "ERROR", 20000);
       if (r==1){
           r = send_cmd("AT+CIPMODE=1", "OK", "ERROR", 10000);
           if (r==1){
